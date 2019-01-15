@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+/*   CAESAR CIPHER */
+int main()
+{
+    char word[26],enc[26],dec[26];
+    cout<<"Enter the Word = ";
+    cin>>word;
+    int i,k,choice,sum,d,nsum;
+    cout<<"Enter the key value = ";
+    cin>>k;
+    while(1)
+    {
+        cout<<"MENU\n1.Encryption\n2.Decryption\n3.Exit\n";
+        cout<<"Enter your choice = ";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:
+            {
+                for(i=0;i<strlen(word);i++)
+                {
+
+                    if(word[i]>='a' && word[i]<='z')
+                    {
+                        d  = (int)word[i]  - 97;
+                        sum  = (d+k)%26;
+                        nsum = sum+97;
+                        enc[i]=(char)nsum;
+                    }
+                    else
+                    {
+                        d  = (int)word[i]  - 65;
+                        sum  = (d+k)%26;
+                        nsum = sum+65;
+                        enc[i]=(char)nsum;
+                    }
+                }
+                cout<<enc<<"\n";
+                break;
+            }
+            case 2:
+            {
+                for(i=0;i<strlen(enc);i++)
+                {
+                    if(enc[i]>='a' && enc[i]<='z')
+                    {
+                        if((int)enc[i]-97<k)
+                        {
+                            sum = 123 + (int)enc[i]-97 -k;
+                            dec[i] = (char)sum;
+                        }
+                        else
+                        {
+                            sum = (int)enc[i]-k;
+                            dec[i] = (char)sum;
+                        }
+                    }
+                    else
+                    {
+                        if((int)enc[i]-65<k)
+                        {
+                            sum = 91 + (int)enc[i]-65 -k;
+                            dec[i] = (char)sum;
+                        }
+                        else
+                        {
+                            sum = (int)enc[i]-k;
+                            dec[i] = (char)sum;
+                        }
+                    }
+                }
+                for(i=0;i<strlen(dec);i++)
+                {
+                    if(dec[i]>='a' && dec[i]<='z')
+                    {
+                        cout<<dec[i];
+                    }
+                    else if(dec[i]>='A' && dec[i]<='Z')
+                    {
+                        cout<<dec[i];
+                    }
+                }
+                cout<<"\n";
+                break;
+            }
+            case 3:
+            {
+                exit(0);
+                break;
+            }
+        }
+    }
+    return 0;
+}
